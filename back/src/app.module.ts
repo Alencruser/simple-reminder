@@ -3,6 +3,11 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
+import { MonsterModule } from './monster/monster.module';
+import { ResourceModule } from './resource/resource.module';
+import { QuestModule } from './quest/quest.module';
+import { FamilyModule } from './family/family.module';
+import { ResourceQuestModule } from './resource-quest/resource-quest.module';
 
 @Module({
   imports: [
@@ -16,6 +21,11 @@ import { ConfigModule } from '@nestjs/config';
       database: process.env.DATABASE_NAME,
       entities: [],
     }),
+    MonsterModule,
+    ResourceModule,
+    QuestModule,
+    FamilyModule,
+    ResourceQuestModule,
   ],
   controllers: [AppController],
   providers: [AppService],

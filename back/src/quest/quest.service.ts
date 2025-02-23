@@ -1,9 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { CreateQuestDto } from './dto/create-quest.dto';
 import { UpdateQuestDto } from './dto/update-quest.dto';
+import { Repository } from 'typeorm';
+import { Quest } from './entities/quest.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Resource } from 'src/resource/entities/resource.entity';
 
 @Injectable()
 export class QuestService {
+  constructor(
+    @InjectRepository(Quest)
+    private questRepository: Repository<Quest>,
+  ) {}
+
   create(createQuestDto: CreateQuestDto) {
     return 'This action adds a new quest';
   }
@@ -13,7 +22,10 @@ export class QuestService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} quest`;
+    return this.questRepository.findOne({
+      where: { id },
+      relations: ['resources'],
+    });
   }
 
   update(id: number, updateQuestDto: UpdateQuestDto) {

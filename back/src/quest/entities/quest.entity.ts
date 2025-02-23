@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Resource } from 'src/resource/entities/resource.entity';
+import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Quest {
@@ -10,4 +11,7 @@ export class Quest {
 
   @Column()
   link: string;
+
+  @ManyToMany(() => Resource, (resource) => resource.quests)
+  resources: Resource[];
 }

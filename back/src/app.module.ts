@@ -1,13 +1,14 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { ConfigModule } from '@nestjs/config';
-import { MonsterModule } from './monster/monster.module';
-import { ResourceModule } from './resource/resource.module';
-import { QuestModule } from './quest/quest.module';
 import { FamilyModule } from './family/family.module';
-import { ResourceQuestModule } from './resource-quest/resource-quest.module';
+import { MonsterModule } from './monster/monster.module';
+import { QuestModule } from './quest/quest.module';
+import { ResourceModule } from './resource/resource.module';
+import { Quest } from './quest/entities/quest.entity';
+import { Resource } from './resource/entities/resource.entity';
 
 @Module({
   imports: [
@@ -19,13 +20,12 @@ import { ResourceQuestModule } from './resource-quest/resource-quest.module';
       username: process.env.DATABASE_USERNAME,
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_NAME,
-      entities: [],
+      entities: [Quest, Resource],
     }),
     MonsterModule,
     ResourceModule,
     QuestModule,
     FamilyModule,
-    ResourceQuestModule,
   ],
   controllers: [AppController],
   providers: [AppService],

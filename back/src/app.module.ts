@@ -9,6 +9,9 @@ import { QuestModule } from './quest/quest.module';
 import { ResourceModule } from './resource/resource.module';
 import { Quest } from './quest/entities/quest.entity';
 import { Resource } from './resource/entities/resource.entity';
+import { Monster } from './monster/entities/monster.entity';
+import { ResourceMonsterModule } from './resource-monster/resource-monster.module';
+import { ResourceMonster } from './resource-monster/entities/resource-monster.entity';
 
 @Module({
   imports: [
@@ -20,12 +23,13 @@ import { Resource } from './resource/entities/resource.entity';
       username: process.env.DATABASE_USERNAME,
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_NAME,
-      entities: [Quest, Resource],
+      entities: [Quest, Resource, Monster, ResourceMonster],
     }),
     MonsterModule,
     ResourceModule,
     QuestModule,
     FamilyModule,
+    ResourceMonsterModule,
   ],
   controllers: [AppController],
   providers: [AppService],
